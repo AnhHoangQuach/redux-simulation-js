@@ -1,15 +1,13 @@
 import html from '../core.js'
+import Footer from './Footer.js'
+import Header from './Header.js'
+import TodoList from './TodoList.js'
 import { connect } from '../store.js'
 
-const connector = connect((state) => ({
-  cars: state.cars,
-}))
-
-function App({ cars }) {
-  return html`<ul>
-      ${cars.map((car) => `<li>${car}</li>`)}
-    </ul>
-    <button onclick="dispatch('ADD', 'Porsche')">Add car</button>`
+function App({ todos }) {
+  return html`<section class="todoapp">
+    ${Header()} ${todos.length > 0 && TodoList()} ${todos.length > 0 && Footer()}
+  </section>`
 }
 
-export default connector(App)
+export default connect()(App)
